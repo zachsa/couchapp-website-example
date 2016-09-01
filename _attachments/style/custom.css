@@ -1,0 +1,12 @@
+.page-title{
+    padding: 20px 0 20px 40px;
+}
+
+.page-nave-choice{
+    width: 100% !important;
+}
+
+.page-nave-choice li{
+    width: 33.3% !important;
+    float: left !important;
+}
