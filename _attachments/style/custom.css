@@ -1,12 +1,59 @@
-.page-title{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+p,
+.p {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+div {
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.page-title {
     padding: 20px 0 20px 40px;
 }
 
-.page-nave-choice{
+.page-nave-choice {
     width: 100% !important;
 }
 
-.page-nave-choice li{
+.page-nave-choice li {
     width: 33.3% !important;
     float: left !important;
+}
+
+.side-menu {
+    z-index: 100;
+}
+
+@media (min-width: 768px) {
+    .visible-page {
+        float: left;
+        width: 70%
+    }
+    .invisible-page {
+        float: left;
+        width: 30%;
+    }
+    .navbar-nav {
+        width: 100%;
+    }
+}
+
+#page h2{
+    position: relative;
+    top: 36px;
 }
