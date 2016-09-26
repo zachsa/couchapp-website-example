@@ -62,19 +62,23 @@ function loadHeader() {
 };
 
 function loadPage(pagePath) {
+    // Clear the page contents
+    $('#contents').remove();
+
+    // TODO: Add loading gif (after a timeout)
+    
+    // Append new contents to the page
     $.ajax({
         url: pagePath,
         statusCode: {
             404: function() {
                 $.get('pages/404.html', function(data) {
-                    $('#contents').remove();
                     $('#page').append('<div id="contents"></div>');
                     $('#contents').append(data);
                 }, 'html');
             }
         },
         success: function(data) {
-            $('#contents').remove();
             $('#page').append('<div id="contents"></div>');
             $('#contents').append(data);
         },
@@ -84,9 +88,11 @@ function loadPage(pagePath) {
     });
 };
 
-
+/*
+ * TODO: Replace with a better router
+ */
 function router() {
-    // This allows JS to use fragments that are not intended for page routing
+    // This allows boostrap to use fragments that are not intended for page routing (i.e. dropdowns)
     var allowedRoutes = [
         'pages',
         'blogposts'
@@ -106,16 +112,12 @@ function router() {
 function init() {
     loadHeader();
 
-    // Load the initial page
-    var locationHash = (window.location.hash).replace('#', '').toLowerCase();
-    if (locationHash === '') {
-        locationHash = '#pages/home';
-        window.location.hash = locationHash;
-    };
-    loadPage(locationHash + '.html');
-
     // Start the popstate watcher (router)
     router();
+
+    // Trigger initial page load
+    $(window).trigger('popstate');
+    
 };
 
 // Kickstart Jquery
