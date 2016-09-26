@@ -3,11 +3,30 @@
 <!-- Original code: http://bootsnipp.com/snippets/featured/admin-side-menu -->
 
 <head>
-    <title>Zach Smith</title>
-    <meta property="og:title" content="Zach Smith Software Engineer">
-    <meta property="og:description" content="Musician-turned-software engineer. This is my story">
+    <!-- Standard -->
+    <title>twirp.me</title>
+    <meta name="title" content="twirp.me">
+    <meta name="description" content="Musician-turned-software engineer. This is my story">
+    <meta name="author" content="Zach Smith">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="zach smith, software engineer, blog, musician, couchdb, couchapp">
+
+    <!-- og -->
+    <meta property="og:title" content="twirp.me">
+    <meta property="og:description" content="Musician-turned-software engineer. This is my story">
+    <meta property="og:image" content="https://TODO">
+    <meta property="og:url" content="https//twirp.me">
+    <meta property="og:type" content="website">
+    
+    <!-- twitter -->
+    <meta name="twitter:title" content="twirp.me">
+    <meta property="twitter:description" content="Musician-turned-software engineer. This is my story">
+    <meta property="twitter:image" content="https:TODO">
+    <meta property="twitter:card" content="https://TODO">
+    <meta property="twitter:site" content="@zachsa">
+    
+    <!-- Includes -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond|Fira+Sans" rel="stylesheet">
     <link rel="stylesheet" href="style/main.css">
@@ -60,21 +79,27 @@ function loadPage(pagePath) {
             $('#contents').append(data);
         },
         complete: function(data) {
-            console.log('complete');
+            console.info(`Page routing to ${pagePath} success`);
         }
     });
 };
 
-function watch404() {
-    $(document).ajaxError(function() {
-        $(".log").text("Triggered ajaxError handler.");
-    });
-}
 
-function popStateWatcher() {
+function router() {
+    // This allows JS to use fragments that are not intended for page routing
+    var allowedRoutes = [
+        'pages',
+        'blogposts'
+    ];
+
     $(window).on('popstate', function(e) {
-        var locationHash = (window.location.hash).replace('#', '').toLowerCase().split('/');
-        loadPage('pages/' + locationHash[0] + '.html');
+        var locationHash = (window.location.hash).replace('#', '').toLowerCase();
+        if (locationHash === '') {
+            window.location.hash = '#pages/home';
+            return;
+        };
+        var pageCheck = locationHash.split('/')[0];
+        if (allowedRoutes.indexOf(pageCheck) >= 0) loadPage(locationHash + '.html');
     });
 };
 
@@ -82,14 +107,15 @@ function init() {
     loadHeader();
 
     // Load the initial page
-    var locationHash = (window.location.hash).replace('#', '').toLowerCase().split('/');
-    loadPage('pages/' + locationHash[0] + '.html');
+    var locationHash = (window.location.hash).replace('#', '').toLowerCase();
+    if (locationHash === '') {
+        locationHash = '#pages/home';
+        window.location.hash = locationHash;
+    };
+    loadPage(locationHash + '.html');
 
     // Start the popstate watcher (router)
-    popStateWatcher();
-
-    // Start page error watcher
-    watch404();
+    router();
 };
 
 // Kickstart Jquery

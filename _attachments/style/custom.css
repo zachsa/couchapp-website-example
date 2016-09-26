@@ -57,3 +57,10 @@ div {
     position: relative;
     top: 36px;
 }
+
+p {
+    text-align: justify;  
+    -moz-text-align-last: left; /* Code for Firefox */
+    text-align-last: left;
+    font-size: 17px;
+}

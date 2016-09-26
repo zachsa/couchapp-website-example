@@ -13,7 +13,7 @@ Install with
 
 or (if you have security turned on)
 
-    couchapp push . http://adminname:adminpass@localhost:5984/example
+    couchapp push . https://usr:pswd@db.twirp.me/twirp
   
 You can also create this app by running
 
