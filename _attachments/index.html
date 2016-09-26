@@ -11,21 +11,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="zach smith, software engineer, blog, musician, couchdb, couchapp">
-
     <!-- og -->
     <meta property="og:title" content="twirp.me">
     <meta property="og:description" content="Musician-turned-software engineer. This is my story">
     <meta property="og:image" content="https://TODO">
     <meta property="og:url" content="https//twirp.me">
     <meta property="og:type" content="website">
-    
     <!-- twitter -->
     <meta name="twitter:title" content="twirp.me">
     <meta property="twitter:description" content="Musician-turned-software engineer. This is my story">
     <meta property="twitter:image" content="https:TODO">
     <meta property="twitter:card" content="https://TODO">
     <meta property="twitter:site" content="@zachsa">
-    
     <!-- Includes -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond|Fira+Sans" rel="stylesheet">
@@ -39,20 +36,22 @@
 <body>
     <!-- Header -->
     <div id="header"></div>
+    <!-- Page -->
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
                 <div class="visible-page">
-                    <!-- Page Content -->
+                    <!-- Page Content holder -->
                     <div id="page">
-                        <div id="contents">
-                        </div>
+                        <!-- Page content -->
+                        <div id="contents"></div>
                     </div>
                 </div>
                 <div class="invisible-page"></div>
             </div>
         </div>
     </div>
+    <!-- TODO: Footer -->
 </body>
 <script>
 function loadHeader() {
@@ -66,7 +65,7 @@ function loadPage(pagePath) {
     $('#contents').remove();
 
     // TODO: Add loading gif (after a timeout)
-    
+
     // Append new contents to the page
     $.ajax({
         url: pagePath,
@@ -117,7 +116,7 @@ function init() {
 
     // Trigger initial page load
     $(window).trigger('popstate');
-    
+
 };
 
 // Kickstart Jquery
